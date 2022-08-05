@@ -30,7 +30,7 @@ resource "google_compute_instance" "secondvm" {
 output "instance_id" {
   value = google_compute_instance.firstvm.instance_id
 }
-output "instance_id" {
+output "instance_id_1" {
   value = google_compute_instance.secondvm.instance_id
 }
 

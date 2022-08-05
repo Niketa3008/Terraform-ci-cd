@@ -9,6 +9,6 @@ variable "name" {
  }
 }
 variable "zone" {
-    default = "asia-south1-a"
+    default = "asia-south2-a"
 }
 

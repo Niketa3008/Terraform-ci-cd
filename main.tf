@@ -1,7 +1,7 @@
 
 resource "google_compute_instance" "firstvm" {
   machine_type = var.machine_type
-  name = var.name
+  name = var.name[name1]
   zone = var.zone
   boot_disk {
     initialize_params {
@@ -15,7 +15,7 @@ resource "google_compute_instance" "firstvm" {
 
 resource "google_compute_instance" "secondvm" {
   machine_type = var.machine_type
-  name = "secondname"
+  name = var.name[name2]
   zone = var.zone
   boot_disk {
     initialize_params {

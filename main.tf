@@ -1,4 +1,6 @@
 
+#this is to make a resource
+
 resource "google_compute_instance" "firstvm" {
   machine_type = var.machine_type
   name = var.name["name1"]

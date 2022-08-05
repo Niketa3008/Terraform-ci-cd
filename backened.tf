@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket = "speedy-aurora-351809-tfstate"
+    bucket = "speedy-aurora-1023-tfstate"
    # prefix = "env/dev"
   }
 }

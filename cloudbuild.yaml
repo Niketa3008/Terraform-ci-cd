@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#Hi,this is cloudbuild
+
 
 steps:
 - id: 'branch name'
@@ -28,21 +28,65 @@ steps:
   name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
   args: 
+  - '-c'
+  - |
+      if [ -d "$BRANCH_NAME/" ]; then
+        cd $BRANCH_NAME
         terraform init
-      
+      # else
+      #   for dir in environments/*/
+      #   do 
+      #     cd ${dir}   
+      #     env=${dir%*/}
+      #     env=${env#*/}
+      #     echo ""
+      #     echo "*************** TERRAFORM INIT ******************"
+      #     echo "******* At environment: ${env} ********"
+      #     echo "*************************************************"
+      #     terraform init || exit 1
+      #     cd ../../
+      #   done
+      fi 
 
 # [START tf-plan]
 - id: 'tf plan'
   name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
-  args:  
+  args: 
+  - '-c'
+  - | 
+      if [ -d "$BRANCH_NAME/" ]; then
+        cd $BRANCH_NAME
         terraform plan
+      # else
+      #   for dir in environments/*/
+      #   do 
+      #     cd ${dir}   
+      #     env=${dir%*/}
+      #     env=${env#*/}  
+      #     echo ""
+      #     echo "*************** TERRAFOM PLAN ******************"
+      #     echo "******* At environment: ${env} ********"
+      #     echo "*************************************************"
+      #     terraform plan || exit 1
+      #     cd ../../
+      #   done
+      fi 
 # [END tf-plan]
 
 # [START tf-apply]
 - id: 'tf apply'
   name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
-  args:      
+  args: 
+  - '-c'
+  - | 
+      if [ -d "$BRANCH_NAME/" ]; then
+        cd $BRANCH_NAME      
         terraform apply -auto-approve
+      else
+        echo "***************************** SKIPPING APPLYING *******************************"
+        echo "Branch '$BRANCH_NAME' does not represent an oficial environment."
+        echo "*******************************************************************************"
+      fi
 # [END tf-apply]      

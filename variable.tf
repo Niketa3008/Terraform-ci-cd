@@ -1,11 +1,14 @@
 variable "machine_type" {
-    default = "e2-micro"
+    default = "f1-micro"
 }
 
 variable "name" {
-    default = "prod-server"
+    default = { 
+        name1= "server-1"
+        name2= "server-2"
+ }
 }
-
 variable "zone" {
     default = "asia-south1-a"
 }
+
